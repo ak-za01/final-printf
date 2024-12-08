@@ -9,7 +9,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	ar rcs $(NAME) $(OBJ)
 
-%.o: %.c ma/ft_printf.h
+%.o: %.c printf/ft_printf.h
 	$(CC) -c $< -o $@
 
 clean:
