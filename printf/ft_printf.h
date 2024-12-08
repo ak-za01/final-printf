@@ -6,7 +6,7 @@
 /*   By: anktiri <anktiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 22:40:15 by anktiri           #+#    #+#             */
-/*   Updated: 2024/12/06 06:27:21 by anktiri          ###   ########.fr       */
+/*   Updated: 2024/12/07 18:56:24 by anktiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int		ft_char(va_list args);
 int		ft_string(va_list args);
 int		ft_pointer(va_list args);
 int		ft_decimal(va_list args);
-int		ft_integer(va_list args);
 int		ft_unsigned(va_list args);
 int		ft_hex_lower(va_list args);
 int		ft_hex_upper(va_list args);

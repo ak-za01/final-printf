@@ -1,13 +1,9 @@
 NAME = libftprintf.a
 CC = cc -Wall -Wextra -Werror
-SOURCE = ma/ft_printf.c ma/print_str.c ma/print_dec.c ma/print_hex.c\
-		 ma/ft_itoa.c ma/ft_utoa.c
-
-#BSOURCE = 
+SOURCE = printf/ft_printf.c printf/print_str.c printf/print_dec.c printf/print_hex.c\
+		 printf/ft_itoa.c printf/ft_utoa.c
 
 OBJ = $(SOURCE:.c=.o)
-
-#BOBJ = $(BSOURCE:.c=.o)
 
 all: $(NAME)
 $(NAME): $(OBJ)
@@ -15,9 +11,6 @@ $(NAME): $(OBJ)
 
 %.o: %.c ma/ft_printf.h
 	$(CC) -c $< -o $@
-
-#bonus: $(BOBJ)
-#	ar rcs $(NAME) $(BOBJ)
 
 clean:
 	rm -f $(OBJ) $(BOBJ)

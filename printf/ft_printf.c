@@ -6,7 +6,7 @@
 /*   By: anktiri <anktiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 22:39:40 by anktiri           #+#    #+#             */
-/*   Updated: 2024/12/06 06:55:20 by anktiri          ###   ########.fr       */
+/*   Updated: 2024/12/08 16:25:30 by anktiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	ft_handlers(int a, va_list args)
 	handlers[1] = ft_string;
 	handlers[2] = ft_pointer;
 	handlers[3] = ft_decimal;
-	handlers[4] = ft_integer;
+	handlers[4] = ft_decimal;
 	handlers[5] = ft_unsigned;
 	handlers[6] = ft_hex_lower;
 	handlers[7] = ft_hex_upper;
@@ -44,24 +44,48 @@ int	ft_handlers(int a, va_list args)
 	return (handlers[a](args));
 }
 
+int	handle_error(const char **format, va_list args)
+{
+	int	printed;
+	int	index;
+
+	printed = 0;
+	*format += 1;
+	if (*format == '\0')
+		return (0);
+	if (find_conversion(**format) != -1)
+	{
+		index = ft_handlers(find_conversion(**format), args);
+		if (index == -1)
+			return (-1);
+		printed += index;
+	}
+	else
+	{
+		write(1, *format, 1);
+		printed++;
+	}
+	return (printed);
+}
+
 int	ft_printf(const char *format, ...)
 {
 	va_list		args;
 	int			printed;
-	int			index;
+	int			a;
 
 	printed = 0;
+	if (write(1, 0, 0) == -1)
+		return (-1);
 	va_start(args, format);
 	while (*format)
 	{
 		if (*format == '%')
 		{
-			format++;
-			if (*format == '\0')
-				return (0);
-			index = find_conversion(*format);
-			if (index != -1)
-				printed += ft_handlers(index, args);
+			a = handle_error(&format, args);
+			if (a == -1)
+				return (-1);
+			printed += a;
 		}
 		else
 		{
