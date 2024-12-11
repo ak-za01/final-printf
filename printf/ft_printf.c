@@ -6,7 +6,7 @@
 /*   By: anktiri <anktiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 22:39:40 by anktiri           #+#    #+#             */
-/*   Updated: 2024/12/08 16:25:30 by anktiri          ###   ########.fr       */
+/*   Updated: 2024/12/11 04:43:22 by anktiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,12 @@ int	ft_printf(const char *format, ...)
 			a = handle_error(&format, args);
 			if (a == -1)
 				return (-1);
+			if (*format == '\0')
+				return (printed);
 			printed += a;
 		}
 		else
-		{
-			write(1, format, 1);
-			printed++;
-		}
+			printed += write(1, format, 1);
 		format++;
 	}
 	return (va_end(args), printed);
